@@ -1,5 +1,12 @@
 library(shiny)
 
+ui <- fluidPage(
+  actionButton("go", "Create Password!"),
+  numericInput("n", "Password Length", 10),
+  textOutput("pwd")
+)
+
+
 password_machine <- function(len)  {
   spcl <- c("!",  "#", "$", "%", "&", "(", ")", "*",  "+", "-", "/", ":",
             ";", "<", "=", ">", "?", "@", "[", "^", "_", "{", "|", "}", "~")
@@ -24,12 +31,6 @@ password_machine <- function(len)  {
 }
 
 
-ui <- fluidPage(
-  actionButton("go", "Create Password!"),
-  numericInput("n", "Password Length", 10),
-  textOutput("pwd")
-)
-
 server <- function(input, output) {
   
   genPassword <- eventReactive(input$go, {
@@ -41,4 +42,4 @@ server <- function(input, output) {
   })
 }
 
-shinyApp(ui, server)
+shinyApp(ui = ui, server = server)
